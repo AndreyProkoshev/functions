@@ -3,19 +3,23 @@ var overMastercardCom: Int = 20
 var visaCom: Double = 0.0075
 
 fun main() {
-    println(commision("Visa", 200000, 100_000))
+    println(commision("Мир", 100000, 20_000))
 }
 
 fun commision(typeCard: String, transferMounth: Int, transfer: Int): Any {
     return when (typeCard) {
         "MasterCard",
         -> if (transferMounth + transfer <= 600_000 && transfer <= 150_000) {
-            if (transferMounth <= 75000) {
+            if (transferMounth + transfer <= 75000) {
                 0
-            } else {
+            }
+            else if(transferMounth + transfer > 75000 && transferMounth <= 75000){
+                (transferMounth + transfer - 75000) * masterCardCom + overMastercardCom
+            }
+            else {
                 transfer * masterCardCom + overMastercardCom
             }
-        } else "1"
+        } else "Превышен лимит"
 
         "Мир" ->
             if (transferMounth + transfer <= 600_000 && transfer <= 150_000) {
